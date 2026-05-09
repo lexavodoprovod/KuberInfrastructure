@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: user-service
+  name: payment-service
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: user-service
+      app: payment-service
   template:
     metadata:
       labels:
-        app: user-service
+        app: payment-service
     spec:
       containers:
-        - name: user-service
-          image: lexavodoprovod/user-service:latest
+        - name: payment-service
+          image: lexavodoprovod/payment-service:latest
           resources:
             requests:
               memory: "512Mi"
@@ -31,17 +31,17 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: secrets
-                  key: user-db-username
+                  key: payment-db-username
             - name: DB_PASSWORD
               valueFrom:
                 secretKeyRef:
                   name: secrets
-                  key: user-db-password
+                  key: payment-db-password
             - name: DB_NAME
               valueFrom:
                 secretKeyRef:
                   name: secrets
-                  key: user-db-name
+                  key: payment-db-name
           livenessProbe:
             httpGet:
               path: /actuator/health/liveness
@@ -58,10 +58,10 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: user-service
+  name: payment-service
 spec:
   selector:
-    app: user-service
+    app: payment-service
   ports:
     - protocol: TCP
       port: 8080

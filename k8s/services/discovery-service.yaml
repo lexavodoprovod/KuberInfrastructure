@@ -15,6 +15,13 @@ spec:
       containers:
         - name: discovery-service
           image: lexavodoprovod/discovery-service:latest
+          resources:
+            requests:
+              memory: "512Mi"
+              cpu: "250m"
+            limits:
+              memory: "1024Mi"
+              cpu: "500m"
           ports:
             - containerPort: 8761
           livenessProbe:

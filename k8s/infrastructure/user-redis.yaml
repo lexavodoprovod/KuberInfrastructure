@@ -15,6 +15,13 @@ spec:
       containers:
         - name: user-service-redis
           image: redis:7-alpine
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "250m"      # 1/4 ядра процессора
+            limits:
+              memory: "512Mi"  # Не даем приложению съесть больше 1ГБ
+              cpu: "500m"
           ports:
             - containerPort: 6379
           volumeMounts:
