@@ -15,6 +15,7 @@ spec:
       containers:
         - name: discovery-service
           image: lexavodoprovod/discovery-service:latest
+          imagePullPolicy: Always
           resources:
             requests:
               memory: "512Mi"

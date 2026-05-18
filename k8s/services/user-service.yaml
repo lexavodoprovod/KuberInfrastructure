@@ -15,6 +15,7 @@ spec:
       containers:
         - name: user-service
           image: lexavodoprovod/user-service:latest
+          imagePullPolicy: Always
           resources:
             requests:
               memory: "512Mi"
@@ -26,7 +27,7 @@ spec:
             - containerPort: 8080
           env:
             - name: SPRING_PROFILES_ACTIVE
-              value: "docker"
+              value: "kubernetes"
             - name: DB_USERNAME
               valueFrom:
                 secretKeyRef:
